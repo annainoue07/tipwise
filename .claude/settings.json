@@ -1,0 +1,84 @@
+{
+  "$comment": [
+    "Project-scoped permissions for TipWise, committed to git so every session",
+    "and every contributor gets the same rules.",
+    "",
+    "Manage these interactively with /permissions rather than hand-editing --",
+    "the dialog validates rules and shows what is currently in effect.",
+    "Run /fewer-permission-prompts after a week to add the read-only commands",
+    "you actually approved repeatedly.",
+    "",
+    "PRINCIPLE: allow everything routine and reversible. Deny anything that",
+    "rewrites history, touches credentials, weakens the safety rails, or",
+    "reaches production. Everything unlisted falls through to a prompt."
+  ],
+
+  "permissions": {
+    "allow": [
+      "Bash(pnpm install)",
+      "Bash(pnpm verify)",
+      "Bash(pnpm test:*)",
+      "Bash(pnpm lint:*)",
+      "Bash(pnpm typecheck:*)",
+      "Bash(pnpm build:*)",
+      "Bash(pnpm dev:*)",
+
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git switch:*)",
+      "Bash(git branch:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git pull:*)",
+      "Bash(git push -u origin:*)",
+
+      "Bash(gh issue view:*)",
+      "Bash(gh issue list:*)",
+      "Bash(gh issue create:*)",
+      "Bash(gh pr create:*)",
+      "Bash(gh pr view:*)",
+      "Bash(gh pr diff:*)",
+      "Bash(gh run view:*)",
+      "Bash(gh run list:*)",
+
+      "Bash(rg:*)",
+      "Bash(ls:*)",
+      "Bash(cat:*)"
+    ],
+
+    "deny": [
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(git rebase:*)",
+      "Bash(git push origin main:*)",
+
+      "Bash(gh pr merge:*)",
+      "Bash(gh pr review:*)",
+      "Bash(gh repo delete:*)",
+      "Bash(gh secret:*)",
+      "Bash(gh api:*)",
+      "Bash(gh auth:*)",
+
+      "Bash(vercel:*)",
+      "Bash(npm publish:*)",
+      "Bash(pnpm publish:*)",
+      "Bash(curl:*)",
+      "Bash(sudo:*)",
+
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./**/.env)",
+      "Read(./**/.env.*)",
+      "Read(~/.ssh/**)",
+      "Read(~/.aws/**)",
+      "Read(~/.config/gh/**)",
+
+      "Edit(./.github/workflows/**)",
+      "Edit(./.env)",
+      "Edit(./.env.*)",
+      "Edit(./.claude/settings.json)"
+    ]
+  }
+}
