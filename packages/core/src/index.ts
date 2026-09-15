@@ -9,3 +9,4 @@ export {
   percentOfCents,
   subtractCents,
 } from "./money";
+export { calculateTip, type TipInput, type TipResult } from "./tip";
