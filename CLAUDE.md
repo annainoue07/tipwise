@@ -51,8 +51,17 @@ appears to require breaking one, **stop and ask** rather than working around it.
 
 ## When you are uncertain
 
-Say so and stop. A question costs one message. A wrong assumption implemented
+Stop and ask. A question costs one message. A wrong assumption implemented
 across fifteen files costs an afternoon of unwinding.
+
+Ask with the AskUserQuestion tool, not in prose. Give 2-4 concrete, named
+options — a choice between alternatives is faster to answer and harder to
+misread than an open question. Put your recommendation first and mark it
+"(Recommended)" when you have one. "Other" is always available, so do not add
+an escape-hatch option yourself.
+
+Prose is the right form only when there is no option set to offer — when you
+need a number, a name, or an explanation rather than a decision.
 
 Specifically, stop and ask when: the task implies storing user data; a tipping
 norm is not in the data files and you would have to invent it; a dependency
