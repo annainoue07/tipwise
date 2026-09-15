@@ -68,6 +68,14 @@ describe("percentOfCents", () => {
     expect(percentOfCents(4275, 18)).toBe(770);
   });
 
+  it("rounds exact half-cents up for two-decimal percentages", () => {
+    // Float multiplication puts each of these a hair below .5 (1250 * 10.04
+    // / 100 is 125.4999...), which rounded them down before integer math.
+    expect(percentOfCents(1250, 10.04)).toBe(126);
+    expect(percentOfCents(25000, 10.03)).toBe(2508);
+    expect(percentOfCents(6250, 10.04)).toBe(628);
+  });
+
   it("handles zero on both sides", () => {
     expect(percentOfCents(0, 20)).toBe(0);
     expect(percentOfCents(5000, 0)).toBe(0);

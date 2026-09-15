@@ -67,6 +67,12 @@ export function parseAmountToCents(input: string): Cents | null {
  * Rounding is explicit because tips land on half-cents routinely:
  * 18% of $42.75 is 769.5 cents, and silently truncating would
  * consistently shortchange by design.
+ *
+ * The percent is resolved to whole hundredths first so the rounding decision
+ * is made on an exact integer. Multiplying by a float like 10.04 directly
+ * lands a hair below a true half-cent (1250 × 10.04 / 100 is 125.4999…) and
+ * rounds the wrong way. Percents finer than hundredths are rounded to the
+ * nearest hundredth.
  */
 export function percentOfCents(amount: Cents, percent: number): Cents {
   assertCents(amount);
@@ -74,8 +80,10 @@ export function percentOfCents(amount: Cents, percent: number): Cents {
     throw new InvalidMoneyError(`Expected a non-negative percent, received ${percent}`);
   }
 
-  const exact = (amount * percent) / 100;
-  return Math.round(exact);
+  const hundredthsOfPercent = Math.round(percent * 100);
+  // amount × hundredths is the tip in 1/10000ths of a cent; adding half a
+  // cent's worth before flooring rounds half up.
+  return Math.floor((amount * hundredthsOfPercent + 5000) / 10000);
 }
 
 /** Add amounts. Variadic so totals read naturally at call sites. */
