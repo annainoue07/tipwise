@@ -53,6 +53,22 @@ Vitest. The rules:
   permanently enshrined one.
 - Tests must be deterministic. No real network, no real clock. Inject both.
 
+## Generated types in apps/web
+
+Next.js generates types into `.next/` that your source depends on —
+`LayoutProps`, `PageProps`, and typed route helpers. These are build output,
+so they are gitignored and do not exist on a clean checkout.
+
+`pnpm typecheck` runs `next typegen` first to create them. Always run the
+script, never bare `tsc` in `apps/web`.
+
+If you see `Cannot find name 'LayoutProps'` or a similar missing Next type,
+the generated types are absent or stale rather than your code being wrong.
+
+More generally: anything under `.next/`, `node_modules/`, or `dist/` exists on
+your machine because a command created it, and does not exist in CI. To check
+the way CI does, `rm -rf apps/web/.next` before verifying
+
 ## Structure and duplication
 
 Before writing a new utility, search for an existing one. Duplicated,
